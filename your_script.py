@@ -1,9 +1,9 @@
-# your_script.py (Streamlit前端)
 import os
 import streamlit as st
 import pandas as pd
-from ai_car_selector_kimi import recommend_car
+from ai_car_selector_kimi import recommend_car, query_kimi
 
+# 设置页面标题和布局
 st.set_page_config(page_title="🚘 AI 智能选车助手", layout="centered")
 st.title("🚗 AI 智能选车助手")
 
@@ -36,6 +36,19 @@ if st.button("开始智能选车 🚀"):
 
     with st.spinner("正在匹配推荐车型…"):
         try:
+            # 获取AI返回的建议
+            ai_resp = query_kimi(user_query)
+            spec = ai_resp["需求"]
+            weights = ai_resp["权重"]
+
+            # 显示AI返回的需求和权重
+            st.subheader("AI 返回的购车建议：")
+            st.write(f"**需求**：")
+            st.json(spec)  # 显示需求部分
+            st.write(f"**权重**：")
+            st.json(weights)  # 显示权重部分
+
+            # 获取推荐结果
             result_df = recommend_car(user_query, top_n=top_n, custom_weights=weight_inputs)
         except Exception as e:
             st.error(f"调用失败：{e}")
