@@ -4,7 +4,7 @@ import pandas as pd
 from openai import OpenAI
 import numpy as np
 
-MOONSHOT_API_KEY = os.getenv("MOONSHOT_API_KEY", "sk-1n7PUR9ySyp4GSl9SQqX7sMFJwuwpIayyfyoPdwHQtrttV6h")
+MOONSHOT_API_KEY = os.getenv("MOONSHOT_API_KEY", "sk-********************************************")
 client = OpenAI(api_key=MOONSHOT_API_KEY, base_url="https://api.moonshot.cn/v1")
 MODEL_NAME = "moonshot-v1-8k"
 VEHICLE_DB = "vehicle_db_1000_named.json"
